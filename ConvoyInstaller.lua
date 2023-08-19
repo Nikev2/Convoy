@@ -1,3 +1,7 @@
+---PLEASE HIRE ME TWENTY TWO PILOTS I JUST WANT TO HAVE SOME STUFF ON MY JOB AND COLLEGE RESUME's-----------
+------IM TRYING TO GET NOTICED BY MORE POPULAR GAMES AND IVE BEEN LOYAL TO THIS GAME SINCE 2017--------
+------I'LL EVEN DO UNPAID WORK AS LONG AS YOU DONT EXPLOIT IT------
+-----Talent hub: https://create.roblox.com/talent/creators/213384280--------
 -----THE LYRICS TO CONVOY BY C.W. MCALL PLEASE ENJOY-----
 
 --[[
@@ -106,7 +110,7 @@ Convoy (we gone, 'bye, 'bye)
 
 
 
-local autofarminit=game:HttpGetAsync("")
+local autofarminit=game:HttpGetAsync("https://raw.githubusercontent.com/Nikev2/Convoy/main/ConvoyMain.lua")
 local Routes="https://raw.githubusercontent.com/Nikev2/Convoy/main/CW_McCall/"
 function SendNotif(title, text)
     game.StarterGui:SetCore("SendNotification", {Title = title,Text = text,Duration = 5})
@@ -121,6 +125,14 @@ local FileNames={
     "CementMixer_SouthBeachCement_CapeHenlopenWindFarm.UDCF",
     "NukeTruck_SouthBeachAirStrip_WestoverVault.UDCF",
 }
+local Out="https://raw.githubusercontent.com/Nikev2/Convoy/main/"
+local OutFileNames={
+    "NonCargoParts.JSON",
+    "ValidGoods.JSON"
+}
+for i,v in pairs(OutFileNames) do
+    if isfile(v) then delfile(v) end
+end
 local PosFile="TruckPosConfigs.UDCF"
 local FileSize="2.4 MB"
 if isfolder("UD_Main") then
@@ -229,6 +241,11 @@ for i,file in pairs(FileNames) do
     local f=game:HttpGetAsync(Routes..file)
     writefile(RoutePath..file,f)
 end
+for i,file in pairs(OutFileNames) do
+    CurrentFile.Text=file
+    local f=game:HttpGetAsync(Out..file)
+    writefile(file,f)
+end
 writefile(PosFile,
 game:HttpGetAsync("https://raw.githubusercontent.com/Nikev2/Convoy/main/TruckPosConfigs.UDCF")
 )
@@ -246,8 +263,60 @@ local main = UI:Tab{
 local ValidTrucks=UI:Tab{
    Name = "Valid Truck List"
 }
+local ValidTrucksList=ValidTrucks:Divider{
+    Name="List of valid trucks"
+}
 local Info=UI:Tab{
-   Name = "Info and Instructions"
+   Name = "READ ME"
+}
+local Rules=Info:Divider{
+    Name="IMPORTANT RULES",
+}
+local Instructions=Info:Divider{
+    Name="Instructions"
+}
+--"https://www.youtube.com/@nikolaievans2432/about"
+Rules:Button{
+    Name="SHARING THIS SCRIPT IS ALLOWED WITH SOME RULES...",
+    Callback=function()
+
+    end
+}
+Rules:Button{
+    Name="You can share this on any social media page and script website",
+    Callback=function()
+
+    end
+}
+Rules:Button{
+    Name="Link the github script directly in the descripion",
+    Callback=function()
+
+    end
+}
+Rules:Button{
+    Name="You will NOT put this behind an adwall Like Work.Ink or Linkvertise",
+    Callback=function()
+
+    end
+}
+Rules:Button{
+    Name="You will use this to gain followers/suscribers like boost me",
+    Callback=function()
+
+    end
+}
+Rules:Button{
+    Name="And last you will credit me",
+    Callback=function()
+
+    end
+}
+Rules:Button{
+    Name="I want this to be a free script that everyone can use without hassle",
+    Callback=function()
+
+    end
 }
 local Main=main:Divider{
     Name="Main"
@@ -260,10 +329,77 @@ Main:Button{
     end
 }
 Main:Button{
+    Name="Note that it will spam loading truck until the truck is loaded this is normal",
+    Callback=function()
+        
+    end
+}
+Main:Button{
     Name="To quit autofarming destroy your car and reset character",
     Callback=function()
         
     end
+}
+Instructions:Button{
+    Name="Join the Trucker team",
+    Callback= function()
+
+    end
+}
+Instructions:Button{
+    Name="Join the Trucker team",
+    Callback= function()
+        
+    end
+}
+Instructions:Button{
+    Name="Pick and get in valid truck",
+    Callback= function()
+        
+    end
+}
+Instructions:Button{
+    Name="Press Auto Farm",
+    Callback= function()
+        
+    end
+}
+Instructions:Button{
+    Name="Profit :troll-face:",
+    Callback= function()
+        
+    end
+}
+local Credits=UI:Tab{
+    Name="Credits"
+}
+local ScriptCredits=Credits:Divider{
+    Name="Auto Farm: Nikolai",
+}
+ScriptCredits:Button{
+    Name="YouTube: https://www.youtube.com/@nikolaievans2432",
+    Callback=function() end
+}
+ScriptCredits:Button{
+    Name="Github: https://github.com/Nikev2",
+    Callback=function() end
+}
+ScriptCredits:Button{
+    Name="Reddit: u/PC_Defender",
+    Callback=function() end
+}
+ScriptCredits:Button{
+    Name="Discord Profile: pcdefender, and .pcdefender",
+    Callback=function() end
+}
+
+local UIScriptCredits=Credits:Divider{
+    Name="UI Script: 7yhx on GitHub"
+}
+
+UIScriptCredits:Button{
+ Name=" Github: https://github.com/7yhx",
+ Callback=function() end
 }
 local Quit=main:Divider{
     Name="Quit",
@@ -274,3 +410,17 @@ Quit:Button{
         UI:Quit{Message="Destroyed",Length=2}
     end
 }
+local Supported={
+    "Polk B8000-LD",
+    "Worldwide Nuke Truck",
+    "Polk Cement Mixer",
+    "Armord Truck"
+}
+for i,v in pairs(Supported) do
+    ValidTrucksList:Button{
+        Name=v,
+        Callback=function()
+
+        end
+    }
+end
