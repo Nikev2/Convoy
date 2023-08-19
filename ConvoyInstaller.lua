@@ -224,7 +224,7 @@ local Loading=true
 spawn(function()
     repeat 
     
-    local mt="Importing Route Files (Total 2.4 MB)"
+    local mt="Importing Route Files"
     ConvoyLoader.Frame:FindFirstChild("Info").Text=tostring(mt..".")
     wait(0.3)
     ConvoyLoader.Frame:FindFirstChild("Info").Text=tostring(mt.."..")
