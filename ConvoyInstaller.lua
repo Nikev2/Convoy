@@ -124,6 +124,15 @@ local FileNames={
     "BoxTruck_WestoverWarehouse_WestonOne.UDCF",
     "CementMixer_SouthBeachCement_CapeHenlopenWindFarm.UDCF",
     "NukeTruck_SouthBeachAirStrip_WestoverVault.UDCF",
+    "ArmoredCar_KensBullseye_DoeRunWarehouse.UDCF",
+    "ArmoredCar_KensCafeTurkmenistan_DoeRunWarehouse.UDCF",
+    "ArmoredCar_KensCargoGeneral_DoeRunWarehouse.UDCF",
+    "ArmoredCar_KensCargoGeneral_WestoverBank.UDCF",
+    "ArmoredCar_KensHorizonCellular_WestoverBank.UDCF",
+    "ArmoredCar_KensInsurance_DoeRunWarehouse.UDCF",
+    "ArmoredCar_KensInsurance_WestoverBank.UDCF",
+    "ArmoredCar_KensTShirt_DoeRunWarehouse.UDCF",
+    
 }
 local Out="https://raw.githubusercontent.com/Nikev2/Convoy/main/"
 local OutFileNames={
