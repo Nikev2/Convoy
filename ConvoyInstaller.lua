@@ -258,7 +258,7 @@ if NeedsUpdate then
     end
     for i, v in pairs(f2) do
         
-        if not string.find(v.name, ".lua") and v.type ~= "dir" then
+        if not string.find(v.name, ".lua") and v.type ~= "dir" and string.find(v.name, ".md")==false then
             local l = game:HttpGetAsync(v.download_url)
             if not isfile(v.name) then
                 Size = Size + v.size
