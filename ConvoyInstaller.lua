@@ -109,46 +109,33 @@ Convoy (we gone, 'bye, 'bye)
 
 
 
-
+local http=game:GetService("HttpService")
 local autofarminit=game:HttpGetAsync("https://raw.githubusercontent.com/Nikev2/Convoy/main/ConvoyMain.lua")
-local Routes="https://raw.githubusercontent.com/Nikev2/Convoy/main/CW_McCall/"
+
+
+
 function SendNotif(title, text)
     game.StarterGui:SetCore("SendNotification", {Title = title,Text = text,Duration = 5})
 end
-local FileNames={
-    "BoxTruck_KensCargoGeneral_KensBullseye.UDCF",
-    "BoxTruck_KensCargoGeneral_SouthBeachAirStrip.UDCF",
-    "BoxTruck_WestoverWarehouse_Hospital.UDCF",
-    "BoxTruck_WestoverWarehouse_KensBullseye.UDCF",
-    "BoxTruck_WestoverWarehouse_SouthBeachAirStrip.UDCF",
-    "BoxTruck_WestoverWarehouse_WestonOne.UDCF",
-    "CementMixer_SouthBeachCement_CapeHenlopenWindFarm.UDCF",
-    "NukeTruck_SouthBeachAirStrip_WestoverVault.UDCF",
-    "ArmoredCar_KensBullseye_DoeRunWarehouse.UDCF",
-    "ArmoredCar_KensCafeTurkmenistan_DoeRunWarehouse.UDCF",
-    "ArmoredCar_KensCargoGeneral_DoeRunWarehouse.UDCF",
-    "ArmoredCar_KensCargoGeneral_WestoverBank.UDCF",
-    "ArmoredCar_KensHorizonCellular_WestoverBank.UDCF",
-    "ArmoredCar_KensInsurance_DoeRunWarehouse.UDCF",
-    "ArmoredCar_KensInsurance_WestoverBank.UDCF",
-    "ArmoredCar_KensTShirt_DoeRunWarehouse.UDCF",
+
+function formatBytes(bytes)
+    local units = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"}
+    local base = 1000
     
-}
-local Out="https://raw.githubusercontent.com/Nikev2/Convoy/main/"
-local OutFileNames={
-    "NonCargoParts.JSON",
-    "ValidGoods.JSON"
-}
-for i,v in pairs(OutFileNames) do
-    if isfile(v) then delfile(v) end
+    if bytes == 0 then
+        return "0 B"
+    end
+    
+    local i = 1
+    while bytes >= base and i < #units do
+        bytes = bytes / base
+        i = i + 1
+    end
+    
+    return string.format("%.2f %s", bytes, units[i])
 end
-local PosFile="TruckPosConfigs.UDCF"
-local FileSize="2.4 MB"
 if isfolder("UD_Main") then
     delfolder("UD_Main")
-end
-if isfile("TruckPosConfigs.UDCF") then
-    delfile("TruckPosConfigs.UDCF")
 end
 
 
@@ -161,7 +148,22 @@ local Title = Instance.new("TextLabel")
 local UICorner_2 = Instance.new("UICorner")
 local Info = Instance.new("TextLabel")
 local CurrentFile = Instance.new("TextLabel")
-
+function formatBytes(bytes)
+    local units = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"}
+    local base = 1000
+    
+    if bytes == 0 then
+        return "0 B"
+    end
+    
+    local i = 1
+    while bytes >= base and i < #units do
+        bytes = bytes / base
+        i = i + 1
+    end
+    
+    return string.format("%.2f %s", bytes, units[i])
+end
 function rstr(len)
     local str=""
     for i=1,len do
@@ -229,38 +231,42 @@ CurrentFile.TextScaled = true
 CurrentFile.TextSize = 14.000
 CurrentFile.TextWrapped = true
 
-local Loading=true
-spawn(function()
-    repeat 
-    
-    local mt="Importing Route Files"
-    ConvoyLoader.Frame:FindFirstChild("Info").Text=tostring(mt..".")
-    wait(0.3)
-    ConvoyLoader.Frame:FindFirstChild("Info").Text=tostring(mt.."..")
-    wait(0.3)
-    ConvoyLoader.Frame:FindFirstChild("Info").Text=tostring(mt.."...")
-    wait(0.3)
-    
-    until Loading==false
-end)
+
 makefolder("UD_Main")
 local RoutePath="UD_Main/"
-for i,file in pairs(FileNames) do
-    CurrentFile.Text=file
-    local f=game:HttpGetAsync(Routes..file)
-    writefile(RoutePath..file,f)
+local f1=http:JSONDecode(game:HttpGetAsync("https://api.github.com/repos/Nikev2/Convoy/contents/CW_McCall"))
+local f2=http:JSONDecode(game:HttpGetAsync("https://api.github.com/repos/Nikev2/Convoy/contents"))
+local t=ConvoyLoader.Frame:FindFirstChild("Info")
+local Size=0
+
+for i,v in pairs(f2) do
+    if not string.find(v.name,".lua") then
+        if isfile(v.name) then
+            delfile(v.name)
+        end
+    end
 end
-for i,file in pairs(OutFileNames) do
-    CurrentFile.Text=file
-    local f=game:HttpGetAsync(Out..file)
-    writefile(file,f)
+print('cleared old data')
+for i,v in pairs(f1) do
+    Size=Size+v.size
+    t.Text=formatBytes(Size)
+    CurrentFile.Text=v.name
+    local l=game:HttpGetAsync(v.download_url)
+    writefile(RoutePath..v.name,l)
 end
-writefile(PosFile,
-game:HttpGetAsync("https://raw.githubusercontent.com/Nikev2/Convoy/main/TruckPosConfigs.UDCF")
-)
-SendNotif("Done Installing","")
-Loading=false
-ConvoyLoader.Frame:Destroy()
+for i,v in pairs(f2) do
+    if not string.find(v.name,".lua") and v.type~="dir" then
+        Size=Size+v.size
+        t.Text=formatBytes(Size)
+        CurrentFile.Text=v.name
+        local l=game:HttpGetAsync(v.download_url)
+        writefile(v.name,l)
+    end
+end
+t.Text="Done Loading"
+CurrentFile.Text=""
+wait(2)
+ConvoyLoader:Destroy()
 local Lib = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/7yhx/kwargs_Ui_Library/main/source.lua"))()
 local UI = Lib:Create{
    Theme = "Dark",
@@ -423,7 +429,6 @@ local Supported={
     "Polk B8000-LD",
     "Worldwide Nuke Truck",
     "Polk Cement Mixer",
-    "Armord Truck"
 }
 for i,v in pairs(Supported) do
     ValidTrucksList:Button{
