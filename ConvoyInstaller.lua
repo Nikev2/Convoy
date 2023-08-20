@@ -444,11 +444,7 @@ Quit:Button{
         UI:Quit{Message="Destroyed",Length=2}
     end
 }
-local Supported={
-    "Polk B8000-LD",
-    "Worldwide Nuke Truck",
-    "Polk Cement Mixer",
-}
+local Supported=http:JSONDecode(readfile("SupportedTrucks.JSON"))
 for i,v in pairs(Supported) do
     ValidTrucksList:Button{
         Name=v,
