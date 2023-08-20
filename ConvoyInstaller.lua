@@ -335,7 +335,7 @@ Rules:Button{
     end
 }
 Rules:Button{
-    Name="You will use this to gain followers/suscribers like boost me",
+    Name="You will use this to gain followers/suscribers through stuff like boost me",
     Callback=function()
 
     end
