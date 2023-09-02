@@ -1,19 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local http=game:GetService("HttpService")
 local autofarminit=game:HttpGetAsync("https://raw.githubusercontent.com/Nikev2/Convoy/main/ConvoyMain.lua")
 
