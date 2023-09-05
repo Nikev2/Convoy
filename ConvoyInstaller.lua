@@ -11,7 +11,7 @@ end
 local NeedsUpdate=false
 local GitVer=game:HttpGetAsync("https://raw.githubusercontent.com/Nikev2/Convoy/main/.VER")
 local RegularVer
-if not isfile(".VER") then 
+if not isfile(".VER") or not isfile("VER.txt") then 
     NeedsUpdate=true 
 else
     RegularVer=readfile(".VER")
@@ -148,7 +148,8 @@ if NeedsUpdate then
     end
     for i, v in pairs(f2) do
         
-        if not string.find(v.name, ".lua") and v.type ~= "dir" and string.find(v.name, ".md")==false then
+        if not string.find(v.name, ".lua") and v['type'] ~= "dir" and not string.find(v.name, ".md") then
+            
             local l = game:HttpGetAsync(v.download_url)
             if not isfile(v.name) then
                 Size = Size + v.size
