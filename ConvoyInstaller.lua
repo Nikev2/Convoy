@@ -339,6 +339,7 @@ local Supported={
     "Polk B8000-LD",
     "Worldwide Nuke Truck",
     "Polk Cement Mixer",
+    "T75 Refridgerated Truck"
 }
 for i,v in pairs(Supported) do
     ValidTrucksList:Button{
