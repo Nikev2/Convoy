@@ -24,5 +24,8 @@ https://www.roblox.com/games/54865335/2X-Ultimate-Driving
 - 13/24/25
     - Came back and added more route files and added in the antos
     - Removed the need for ```ValidGoods.JSON``` and ```NonCargoParts.JSON```
+    - Added the recording tool for you guys to use. This makes new UDCF files if you want to add this to the growing route files dm in discord: pcdefender or just do a pull/push request and ill get to it
+    - THE FILES THAT ARE CHANGED WITH THIS RECORDING TOOL IS ALL THE FILES IN ```UD_Main``` (Roblox) or ```CW_Mcall```(Github) Folder and ```TruckPosConfigs.UDCF``` in the workspace folder of your executor
+
 
 
