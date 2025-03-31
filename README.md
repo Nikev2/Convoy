@@ -1,6 +1,6 @@
 
 # Convoy [UPDATED 3/24/2025]
-
+# Note Wave does not work its bitching on how it can't use luraph and keeps crashing when i try running it
 
 ## Script here for people who don't want to listen to this recipie!
 ```lua
